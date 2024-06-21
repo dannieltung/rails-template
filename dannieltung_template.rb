@@ -25,39 +25,41 @@ run "curl -L https://github.com/lewagon/rails-stylesheets/archive/master.zip > s
 run "unzip stylesheets.zip -d app/assets && rm -f stylesheets.zip && rm -f app/assets/rails-stylesheets-master/README.md"
 run "mv app/assets/rails-stylesheets-master app/assets/stylesheets"
 
-# Create custom _colors.scss in the stylesheets/config directory
-file 'app/assets/stylesheets/config/_colors.scss', <<~SCSS
-  $amarelo-0: #fffae4;
-  $amarelo-100: #fff3c3;
-  $amarelo-200: #ffe88a;
-  $amarelo-300: #ffdb4c;
-  $amarelo-400: #ffcc00;
-  $amarelo-500: #e0b300;
-  $blue: #0d6efd;
-  $gray: #0e0000;
-  $gray-2: #4f4f4f;
-  $green: #016340;
-  $light-gray: #f4f4f4;
-  $neutro-0: #fcfdff;
-  $neutro-100: #f7f8fb;
-  $neutro-200: #e8eaee;
-  $neutro-300: #cfd1d6;
-  $neutro-400: #abadb1;
-  $neutro-500: #7f8084;
-  $neutro-600: #505153;
-  $neutro-700: #222324;
-  $orange: #e67e22;
-  $red: #fd1015;
-  $roxo-0: #eae7f9;
-  $roxo-100: #bbaff9;
-  $roxo-200: #6e52ff;
-  $roxo-300: #4728e3;
-  $roxo-400: #1b00a3;
-  $roxo-500: #0b0042;
-  $state-green: #219653;
-  $state-red: #c92121;
-  $yellow: #ffc65a;
-SCSS
+# Create or replace custom _colors.scss in the stylesheets/config directory
+file 'app/assets/stylesheets/config/_colors.scss', force: true do
+  <<~SCSS
+    $amarelo-0: #fffae4;
+    $amarelo-100: #fff3c3;
+    $amarelo-200: #ffe88a;
+    $amarelo-300: #ffdb4c;
+    $amarelo-400: #ffcc00;
+    $amarelo-500: #e0b300;
+    $blue: #0d6efd;
+    $gray: #0e0000;
+    $gray-2: #4f4f4f;
+    $green: #016340;
+    $light-gray: #f4f4f4;
+    $neutro-0: #fcfdff;
+    $neutro-100: #f7f8fb;
+    $neutro-200: #e8eaee;
+    $neutro-300: #cfd1d6;
+    $neutro-400: #abadb1;
+    $neutro-500: #7f8084;
+    $neutro-600: #505153;
+    $neutro-700: #222324;
+    $orange: #e67e22;
+    $red: #fd1015;
+    $roxo-0: #eae7f9;
+    $roxo-100: #bbaff9;
+    $roxo-200: #6e52ff;
+    $roxo-300: #4728e3;
+    $roxo-400: #1b00a3;
+    $roxo-500: #0b0042;
+    $state-green: #219653;
+    $state-red: #c92121;
+    $yellow: #ffc65a;
+  SCSS
+end
 
 # Ensure the application.scss imports the custom colors
 inject_into_file 'app/assets/stylesheets/application.scss', before: '*/' do
@@ -85,7 +87,7 @@ file "app/views/shared/_flashes.html.erb", <<~HTML
   <% if alert %>
     <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
       <%= alert %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+      <button type="button" class="btn-close" data-bs-dismiss="alert, aria-label="Close">
       </button>
     </div>
   <% end %>
@@ -165,7 +167,7 @@ after_bundle do
     end
   RUBY
 
-  # migrate + devise views
+  # Migrate + devise views
   ########################################
   rails_command "db:migrate"
   generate("devise:views")
@@ -225,14 +227,16 @@ after_bundle do
   file 'config/initializers/assets.rb', force: true do
     <<~RUBY
       Rails.application.config.assets.version = "1.0"
-
       Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-
       Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf)
-
       Rails.application.config.assets.paths << Rails.root.join("node_modules")
     RUBY
   end
+
+  # Download and setup fonts
+  ########################################
+  run "mkdir -p app/assets/fonts"
+  run "curl -L https://github.com/yourusername/rails-template/raw/master/app/assets/fonts/* -o app/assets/fonts/"
 
   # Git
   ########################################
