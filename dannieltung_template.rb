@@ -222,15 +222,17 @@ after_bundle do
 
   # Modify config/initializers/assets.rb
   ########################################
-  file 'config/initializers/assets.rb', <<~RUBY
-    Rails.application.config.assets.version = "1.0"
+  file 'config/initializers/assets.rb', force: true do
+    <<~RUBY
+      Rails.application.config.assets.version = "1.0"
 
-    Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+      Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
-    Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf)
+      Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf)
 
-    Rails.application.config.assets.paths << Rails.root.join("node_modules")
-  RUBY
+      Rails.application.config.assets.paths << Rails.root.join("node_modules")
+    RUBY
+  end
 
   # Git
   ########################################
