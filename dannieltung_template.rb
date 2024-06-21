@@ -236,7 +236,7 @@ after_bundle do
   # Download and setup fonts
   ########################################
   run "mkdir -p app/assets/fonts"
-  run "curl -L https://github.com/yourusername/rails-template/raw/master/app/assets/fonts/* -o app/assets/fonts/"
+  run "curl -L https://github.com/dannieltung/rails-template/raw/master/app/assets/fonts/* -o app/assets/fonts/"
 
   # Git
   ########################################
