@@ -25,47 +25,6 @@ run "curl -L https://github.com/lewagon/rails-stylesheets/archive/master.zip > s
 run "unzip stylesheets.zip -d app/assets && rm -f stylesheets.zip && rm -f app/assets/rails-stylesheets-master/README.md"
 run "mv app/assets/rails-stylesheets-master app/assets/stylesheets"
 
-# Create or replace custom _colors.scss in the stylesheets/config directory
-file 'app/assets/stylesheets/config/_colors.scss', force: true do
-  <<~SCSS
-    $amarelo-0: #fffae4;
-    $amarelo-100: #fff3c3;
-    $amarelo-200: #ffe88a;
-    $amarelo-300: #ffdb4c;
-    $amarelo-400: #ffcc00;
-    $amarelo-500: #e0b300;
-    $blue: #0d6efd;
-    $gray: #0e0000;
-    $gray-2: #4f4f4f;
-    $green: #016340;
-    $light-gray: #f4f4f4;
-    $neutro-0: #fcfdff;
-    $neutro-100: #f7f8fb;
-    $neutro-200: #e8eaee;
-    $neutro-300: #cfd1d6;
-    $neutro-400: #abadb1;
-    $neutro-500: #7f8084;
-    $neutro-600: #505153;
-    $neutro-700: #222324;
-    $orange: #e67e22;
-    $red: #fd1015;
-    $roxo-0: #eae7f9;
-    $roxo-100: #bbaff9;
-    $roxo-200: #6e52ff;
-    $roxo-300: #4728e3;
-    $roxo-400: #1b00a3;
-    $roxo-500: #0b0042;
-    $state-green: #219653;
-    $state-red: #c92121;
-    $yellow: #ffc65a;
-  SCSS
-end
-
-# Ensure the application.scss imports the custom colors
-inject_into_file 'app/assets/stylesheets/application.scss', before: '*/' do
-  "@import 'config/colors';\n"
-end
-
 # Layout
 ########################################
 gsub_file(
@@ -244,4 +203,105 @@ after_bundle do
   git :init
   git add: "."
   git commit: "-m 'Initial commit with devise template from https://github.com/lewagon/rails-templates'"
+
+  # Create or replace custom _colors.scss in the stylesheets/config directory
+  file 'app/assets/stylesheets/config/_colors.scss', force: true do
+    <<~SCSS
+      $amarelo-0: #fffae4;
+      $amarelo-100: #fff3c3;
+      $amarelo-200: #ffe88a;
+      $amarelo-300: #ffdb4c;
+      $amarelo-400: #ffcc00;
+      $amarelo-500: #e0b300;
+      $blue: #0d6efd;
+      $gray: #0e0000;
+      $gray-2: #4f4f4f;
+      $green: #016340;
+      $light-gray: #f4f4f4;
+      $neutro-0: #fcfdff;
+      $neutro-100: #f7f8fb;
+      $neutro-200: #e8eaee;
+      $neutro-300: #cfd1d6;
+      $neutro-400: #abadb1;
+      $neutro-500: #7f8084;
+      $neutro-600: #505153;
+      $neutro-700: #222324;
+      $orange: #e67e22;
+      $red: #fd1015;
+      $roxo-0: #eae7f9;
+      $roxo-100: #bbaff9;
+      $roxo-200: #6e52ff;
+      $roxo-300: #4728e3;
+      $roxo-400: #1b00a3;
+      $roxo-500: #0b0042;
+      $state-green: #219653;
+      $state-red: #c92121;
+      $yellow: #ffc65a;
+    SCSS
+  end
+
+  # Ensure the application.scss imports the custom colors
+  inject_into_file 'app/assets/stylesheets/application.scss', before: '*/' do
+    "@import 'config/colors';\n"
+  end
+
+  # Create or replace custom _fonts.scss in the stylesheets/config directory
+  file 'app/assets/stylesheets/config/_fonts.scss', force: true do
+    <<~SCSS
+      // Import Google fonts
+      @import url("https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap");
+
+      // To use a font file
+      @font-face {
+        font-family: "Roboto";
+        src: font-url("Roboto-Regular.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: font-url("Roboto-Bold.ttf") format("truetype");
+        font-weight: bold;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Rubik";
+        src: font-url("Rubik-Medium.ttf") format("truetype");
+        font-weight: 500;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Rubik";
+        src: font-url("Rubik-Regular.ttf") format("truetype");
+        font-weight: 400; // Regular weight
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "DM Sans";
+        src: url("DMSans-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Noto Sans";
+        src: url("NotoSans-Regular.ttf") format("truetype");
+        font-weight: 300;
+        font-style: normal;
+      }
+
+      // Define fonts for body and headers
+      $body-font: "Rubik", "Roboto", "Helvetica", "sans-serif";
+      $headers-font: "Rubik", "Roboto", "Helvetica", "sans-serif";
+    SCSS
+  end
+
+  # Ensure the application.scss imports the custom fonts
+  inject_into_file 'app/assets/stylesheets/application.scss', before: '*/' do
+    "@import 'config/fonts';\n"
+  end
 end
