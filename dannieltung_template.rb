@@ -262,10 +262,11 @@ after_bundle do
   ########################################
   git :init
   git add: "."
-  git commit: "-m 'Initial commit with devise template from https://github.com/lewagon/rails-templates'"
+  git commit: "-m 'Initial commit with devise template from https://github.com/lewagon/rails-templates and some customizations'"
 
-  # Rename the default branch to 'main'
-  run "git branch -m master main"
+  # Get the current branch name and rename it to 'main'
+  current_branch = `git branch --show-current`.strip
+  run "git branch -m #{current_branch} main" unless current_branch == "main"
 
   # Create or replace custom _colors.scss in the stylesheets/config directory
   file 'app/assets/stylesheets/config/_colors.scss', force: true do
