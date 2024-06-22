@@ -373,4 +373,51 @@ after_bundle do
   inject_into_file 'app/assets/stylesheets/application.scss', before: '*/' do
     "@import 'config/fonts';\n"
   end
+
+  # Create or ensure the components director exists
+  run "mkdir -p app/assets/stylesheets/components"
+
+  # Create the _default_btn.scss file with some default button styles
+  file 'app/assets/stylesheets/components/_default_btn.scss', force: true do
+    <<~SCSS
+      // Default button styles
+      .default-btn {
+        /* Appearance */
+        border-radius: 8px;
+        cursor: pointer;
+        border: 1px solid $roxo-300;
+        background-color: $roxo-300;
+        color: $neutro-0;
+
+        /* Sizing and Layout */
+        width: 100%;
+        height: 45px;
+        padding: 10px 8px;
+        display: flex; /* Enable flexbox for centering */
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0; /* Prevent shrinking */
+
+        /* Typography */
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px; /* 114.286% */
+        text-align: center;
+        text-transform: uppercase;
+        font-feature-settings: "liga" off, "clig" off;
+
+        /* Disabled State */
+        &.disabled,
+        &[disabled] {
+          border: 1px solid $roxo-100;
+          background-color: $roxo-100;
+          color: $roxo-0;
+          cursor: default; /* Update cursor for disabled state */
+        }
+      }
+    SCSS
+  end
+
+  # Append the import statement to the existing components/_index.scss
+  append_to_file 'app/assets/stylesheets/components/_index.scss', "\n@import 'default_btn';\n"
 end
