@@ -266,7 +266,12 @@ after_bundle do
 
   # Get the current branch name and rename it to 'main'
   current_branch = `git branch --show-current`.strip
-  run "git branch -m #{current_branch} main" unless current_branch == "main"
+  default_branch =  `git config --global init.defaultBranch`.strip
+  default_branch = "master" if default_branch.empty?
+
+  if current_branch != "main" && default_branch != "main"
+    run "git branch -m #{current_branch} main"
+  end
 
   # Create or replace custom _colors.scss in the stylesheets/config directory
   file 'app/assets/stylesheets/config/_colors.scss', force: true do
