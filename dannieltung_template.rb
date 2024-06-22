@@ -195,14 +195,77 @@ after_bundle do
   # Download and setup fonts
   ########################################
   run "mkdir -p app/assets/fonts"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/DMSans-Bold.ttf -o app/assets/fonts/DMSans-Bold.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/NotoSans-Regular.ttf -o app/assets/fonts/NotoSans-Regular.ttf"
+
+  # Roboto font family
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-Black.ttf -o app/assets/fonts/Roboto-Black.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-BlackItalic.ttf -o app/assets/fonts/Roboto-BlackItalic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-Bold.ttf -o app/assets/fonts/Roboto-Bold.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-BoldItalic.ttf -o app/assets/fonts/Roboto-BoldItalic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-Italic.ttf -o app/assets/fonts/Roboto-Italic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-Light.ttf -o app/assets/fonts/Roboto-Light.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-LightItalic.ttf -o app/assets/fonts/Roboto-LightItalic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-Medium.ttf -o app/assets/fonts/Roboto-Medium.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-MediumItalic.ttf -o app/assets/fonts/Roboto-MediumItalic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-Regular.ttf -o app/assets/fonts/Roboto-Regular.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-Thin.ttf -o app/assets/fonts/Roboto-Thin.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Roboto-ThinItalic.ttf -o app/assets/fonts/Roboto-ThinItalic.ttf"
+
+  # Rubik font family
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-Black.ttf -o app/assets/fonts/Rubik-Black.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-BlackItalic.ttf -o app/assets/fonts/Rubik-BlackItalic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-Bold.ttf -o app/assets/fonts/Rubik-Bold.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-BoldItalic.ttf -o app/assets/fonts/Rubik-BoldItalic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-ExtraBold.ttf -o app/assets/fonts/Rubik-ExtraBold.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-ExtraBoldItalic.ttf -o app/assets/fonts/Rubik-ExtraBoldItalic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-Italic-VariableFont_wght.ttf -o app/assets/fonts/Rubik-Italic-VariableFont_wght.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-Italic.ttf -o app/assets/fonts/Rubik-Italic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-Light.ttf -o app/assets/fonts/Rubik-Light.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-LightItalic.ttf -o app/assets/fonts/Rubik-LightItalic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-Medium.ttf -o app/assets/fonts/Rubik-Medium.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-MediumItalic.ttf -o app/assets/fonts/Rubik-MediumItalic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-Regular.ttf -o app/assets/fonts/Rubik-Regular.ttf"
+
   run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-SemiBold.ttf -o app/assets/fonts/Rubik-SemiBold.ttf"
 
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-SemiBoldItalic.ttf -o app/assets/fonts/Rubik-SemiBoldItalic.ttf"
+
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-VariableFont_wght.ttf -o app/assets/fonts/Rubik-VariableFont_wght.ttf"
 
   # Git
   ########################################
   git :init
   git add: "."
   git commit: "-m 'Initial commit with devise template from https://github.com/lewagon/rails-templates'"
+
+  # Rename the default branch to 'main'
+  run "git branch -m master main"
 
   # Create or replace custom _colors.scss in the stylesheets/config directory
   file 'app/assets/stylesheets/config/_colors.scss', force: true do
