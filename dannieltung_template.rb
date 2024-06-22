@@ -380,7 +380,6 @@ after_bundle do
   # Create the _default_btn.scss file with some default button styles
   file 'app/assets/stylesheets/components/_default_btn.scss', force: true do
     <<~SCSS
-      // Default button styles
       .default-btn {
         /* Appearance */
         border-radius: 8px;
