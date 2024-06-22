@@ -236,7 +236,8 @@ after_bundle do
   # Download and setup fonts
   ########################################
   run "mkdir -p app/assets/fonts"
-  run "curl -L https://github.com/dannieltung/rails-template/tree/master/app/assets/fonts/* > app/assets/fonts/"
+  run "curl -L https://raw.githubusercontent.com/dannieltung/rails-template/master/app/assets/fonts/Rubik-SemiBold.ttf -o app/assets/fonts/Rubik-SemiBold.ttf"
+
 
   # Git
   ########################################
